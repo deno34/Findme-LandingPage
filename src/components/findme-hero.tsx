@@ -9,7 +9,7 @@ export function FindmeHero() {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
 
   const onResize = useCallback(() => {
-    if (rendererRef.current) {
+    if (rendererRef.current?.userData?.camera) {
         const camera = rendererRef.current.userData.camera;
         camera.aspect = window.innerWidth / Math.max(window.innerHeight, 400); // Prevent aspect ratio from becoming too extreme
         camera.updateProjectionMatrix();
@@ -30,7 +30,7 @@ export function FindmeHero() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     mount.appendChild(renderer.domElement);
-    renderer.userData.camera = camera;
+    renderer.userData = { camera };
     rendererRef.current = renderer;
 
     // Main Display Object

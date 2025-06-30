@@ -95,13 +95,11 @@
 }
 
 .glowing-button {
-  @apply bg-primary/10 border text-primary-foreground;
-  border-color: hsl(var(--primary));
+  @apply bg-primary/10 border border-primary text-primary-foreground;
   animation: glow 4s infinite ease-in-out;
 }
 
 .glowing-button-secondary {
-  @apply bg-accent/10 border text-primary-foreground;
-  border-color: hsl(var(--accent));
+  @apply bg-accent/10 border border-accent text-primary-foreground;
   animation: glow 4s infinite ease-in-out reverse;
 }
