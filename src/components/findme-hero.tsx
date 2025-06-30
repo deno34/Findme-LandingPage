@@ -11,7 +11,7 @@ export function FindmeHero() {
         <p className="mt-4 text-xl md:text-2xl text-foreground/80 font-headline">
           Smarter Conversations. Live Connections.
         </p>
-        <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+        <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
           The only AI-powered messenger with real-time location groups, voice translation, and absolute privacy.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
