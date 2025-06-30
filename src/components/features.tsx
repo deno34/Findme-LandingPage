@@ -1,21 +1,37 @@
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { MapPin, ShieldCheck, Languages } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { MessageCircle, Briefcase, UserCog, Library, Contact, Mailbox } from "lucide-react";
 
 const featuresList = [
   {
-    icon: <MapPin className="w-8 h-8 text-primary" />,
-    title: "Real-Time Location Groups",
-    description: "Create groups and see your friends on a live map. Perfect for meetups and ensuring everyone is safe."
+    icon: <MessageCircle className="w-8 h-8 text-primary" />,
+    title: "Communication",
+    roles: ["sendMessages", "initiateCall", "sendEmail"]
   },
   {
-    icon: <Languages className="w-8 h-8 text-primary" />,
-    title: "Live Voice Translation",
-    description: "Break language barriers with instant voice and text translations, powered by cutting-edge AI."
+    icon: <Briefcase className="w-8 h-8 text-primary" />,
+    title: "Productivity",
+    roles: ["create_document", "createMessagingChannel"]
   },
   {
-    icon: <ShieldCheck className="w-8 h-8 text-primary" />,
-    title: "Absolute Privacy",
-    description: "Your conversations are yours. With end-to-end encryption, we ensure your data is never compromised."
+    icon: <UserCog className="w-8 h-8 text-primary" />,
+    title: "Personal",
+    roles: ["changeAppTheme", "toggleLocation", "getCurrentLocation"]
+  },
+  {
+    icon: <Library className="w-8 h-8 text-primary" />,
+    title: "Information",
+    roles: ["fetchGDELTNews", "fetchWikipediaInfo", "getWeatherInfo"]
+  },
+  {
+    icon: <Contact className="w-8 h-8 text-primary" />,
+    title: "Contacts",
+    roles: ["deleteContacts", "retrieveUserBySharingCode"]
+  },
+  {
+    icon: <Mailbox className="w-8 h-8 text-primary" />,
+    title: "Messages",
+    roles: ["retrieveMessages", "deleteMessages"]
   }
 ];
 
@@ -23,19 +39,27 @@ export function Features() {
   return (
     <section id="features">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold font-headline">Discover a New Way to Connect</h2>
-        <p className="text-muted-foreground mt-2">Core features designed for a seamless, secure, and smart experience.</p>
+        <h2 className="text-4xl font-bold font-headline">Powerful AI Capabilities</h2>
+        <p className="text-muted-foreground mt-2">Explore the core functions of Findme's intelligent assistant.</p>
       </div>
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {featuresList.map((feature, index) => (
-          <Card key={index} className="bg-card/50 border-border/50 text-center flex flex-col items-center p-6 transition-all duration-300 hover:border-primary hover:scale-105">
-            <CardHeader>
+          <Card key={index} className="bg-card/50 border-border/50 text-center flex flex-col transition-all duration-300 hover:border-primary hover:scale-105">
+            <CardHeader className="items-center">
               <div className="p-4 bg-primary/10 rounded-full inline-block mb-4">
                 {feature.icon}
               </div>
               <CardTitle className="font-headline">{feature.title}</CardTitle>
             </CardHeader>
-            <CardDescription>{feature.description}</CardDescription>
+            <CardContent>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {feature.roles.map((role) => (
+                  <Badge key={role} variant="secondary" className="bg-primary/20 text-primary-foreground font-mono text-xs">
+                    {role}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
           </Card>
         ))}
       </div>
