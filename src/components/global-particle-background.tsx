@@ -56,9 +56,9 @@ export function GlobalParticleBackground() {
         posArray[i3 + 1] = (Math.random() - 0.5) * 20;
         posArray[i3 + 2] = (Math.random() - 0.5) * 20;
 
-        velocities[i3 + 0] = (Math.random() - 0.5) * 0.002;
-        velocities[i3 + 1] = (Math.random() - 0.5) * 0.002;
-        velocities[i3 + 2] = (Math.random() - 0.5) * 0.002;
+        velocities[i3 + 0] = (Math.random() - 0.5) * 0.003;
+        velocities[i3 + 1] = (Math.random() - 0.5) * 0.003;
+        velocities[i3 + 2] = (Math.random() - 0.5) * 0.003;
 
         initialPositions[i3 + 0] = posArray[i3 + 0];
         initialPositions[i3 + 1] = posArray[i3 + 1];
