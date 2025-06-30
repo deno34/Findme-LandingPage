@@ -8,7 +8,7 @@ export function FindmeHero() {
         <h1 className="text-5xl md:text-7xl font-bold font-headline" style={{ textShadow: '0 0 15px hsl(var(--primary)), 0 0 25px hsl(var(--accent))' }}>
           Findme Messenger
         </h1>
-        <p className="mt-4 text-xl md:text-2xl text-primary-foreground/80 font-headline">
+        <p className="mt-4 text-xl md:text-2xl text-foreground/80 font-headline">
           Smarter Conversations. Live Connections.
         </p>
         <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
