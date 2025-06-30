@@ -7,7 +7,7 @@ import { Footer } from '@/components/footer';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-dvh bg-background text-foreground font-body">
+    <div className="flex flex-col min-h-dvh text-foreground font-body">
       <Header />
       <main className="flex-grow">
         <FindmeHero />
