@@ -32,17 +32,6 @@ export function FindmeHero() {
     mount.appendChild(renderer.domElement);
     renderer.userData = { camera };
     rendererRef.current = renderer;
-
-    // Main Display Object
-    const geometry = new THREE.BoxGeometry(2, 4, 0.2);
-    const edges = new THREE.EdgesGeometry(geometry);
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x7DF9FF });
-    const lineSegments = new THREE.LineSegments(edges, lineMaterial);
-    
-    const fillMaterial = new THREE.MeshBasicMaterial({ color: 0x1E90FF, transparent: true, opacity: 0.1 });
-    const cube = new THREE.Mesh(geometry, fillMaterial);
-    cube.add(lineSegments);
-    scene.add(cube);
     
     // Grid
     const gridHelper = new THREE.GridHelper(50, 50, 0x1E90FF, 0x301934);
@@ -71,8 +60,6 @@ export function FindmeHero() {
     const clock = new THREE.Clock();
     const animate = () => {
         const elapsedTime = clock.getElapsedTime();
-        cube.rotation.y = elapsedTime * 0.2;
-        cube.position.y = Math.sin(elapsedTime * 0.5) * 0.2;
         particlesMesh.rotation.y = elapsedTime * 0.05;
 
         renderer.render(scene, camera);
