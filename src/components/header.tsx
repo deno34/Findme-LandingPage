@@ -10,7 +10,6 @@ export function Header() {
         </div>
         <nav className="hidden md:flex gap-6 items-center">
             <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</a>
-            <a href="#demos" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Demos</a>
         </nav>
       </div>
     </header>
