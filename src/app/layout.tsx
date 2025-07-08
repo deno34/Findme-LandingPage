@@ -6,6 +6,9 @@ import { GlobalParticleBackground } from '@/components/global-particle-backgroun
 export const metadata: Metadata = {
   title: 'Brainsay',
   description: 'Smarter Conversations. Live Connections.',
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
