@@ -6,7 +6,7 @@ export function Header() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <MessageSquareText className="w-8 h-8 text-primary" />
-          <h1 className="text-2xl font-bold font-headline">Findme Messenger</h1>
+          <h1 className="text-2xl font-bold font-headline">Brainsay</h1>
         </div>
         <nav className="hidden md:flex gap-6 items-center">
             <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</a>

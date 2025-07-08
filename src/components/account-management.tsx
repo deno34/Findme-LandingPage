@@ -25,7 +25,7 @@ export function AccountManagement() {
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold font-headline">Your Digital Guardian</h2>
         <p className="text-foreground/80 mt-2 max-w-3xl mx-auto">
-          Findme Brain doesn't just manage your tasks—it secures your digital identity with intelligent, round-the-clock protection.
+          Brainsay doesn't just manage your tasks—it secures your digital identity with intelligent, round-the-clock protection.
         </p>
       </div>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">

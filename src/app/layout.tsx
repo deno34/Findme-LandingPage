@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { GlobalParticleBackground } from '@/components/global-particle-background';
 
 export const metadata: Metadata = {
-  title: 'Findme Messenger',
+  title: 'Brainsay',
   description: 'Smarter Conversations. Live Connections.',
 };
 

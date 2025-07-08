@@ -1,17 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 
-export function FindmeHero() {
+export function BrainsayHero() {
   return (
     <div className="relative h-dvh w-full overflow-hidden flex items-center justify-center">
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-        <h1 className="text-5xl md:text-7xl font-bold font-headline" style={{ textShadow: '0 0 15px hsl(var(--primary)), 0 0 25px hsl(var(--accent))' }}>
-          Findme Messenger
+        <h1 className="text-5xl md:text-7xl font-bold font-headline text-foreground" style={{ textShadow: '0 0 15px hsl(var(--primary)), 0 0 25px hsl(var(--accent))' }}>
+          Brainsay
         </h1>
-        <p className="mt-4 text-xl md:text-2xl text-foreground/80 font-headline">
+        <p className="mt-4 text-xl md:text-2xl text-foreground/90 font-headline">
           Smarter Conversations. Live Connections.
         </p>
-        <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
+        <p className="mt-4 max-w-2xl mx-auto text-foreground/90">
           The only AI-powered messenger with real-time location groups, voice translation, and absolute privacy.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
