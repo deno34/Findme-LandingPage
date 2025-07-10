@@ -97,7 +97,7 @@ export function Features() {
                 <div className="flex flex-wrap gap-2 justify-center">
                   {feature.roles.map((role) => (
                     <DialogTrigger key={role.id} asChild onClick={() => setSelectedRole(role)}>
-                      <Badge variant="secondary" className="cursor-pointer bg-primary/20 text-primary-foreground font-mono text-xs">
+                      <Badge variant="secondary" className="cursor-pointer bg-primary/20 text-primary-foreground font-mono text-xs hover:bg-primary/30">
                         {role.name}
                       </Badge>
                     </DialogTrigger>
