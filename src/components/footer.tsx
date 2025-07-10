@@ -5,7 +5,7 @@ export function Footer() {
                 <div className="space-y-4">
                     <p>&copy; {new Date().getFullYear()} Brainsay, a subsidiary of Trapslash Inc. All rights reserved.</p>
                     <div className="text-sm max-w-2xl mx-auto">
-                        <p className="font-semibold text-foreground/80 mb-1">From the creators of Brainsay:</p>
+                        <p className="font-semibold text-foreground/80 mb-1">Also from the creators of Brainsay:</p>
                         <p>
                             <a href="https://neridiaai.netlify.app" target="_blank" rel="noopener noreferrer" className="font-bold text-primary hover:underline">
                                 Nerida AI
