@@ -79,7 +79,7 @@ export function Features() {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold font-headline">Powered by Nerida Brain</h2>
           <p className="text-foreground mt-2 max-w-3xl mx-auto">
-            Brainsay is more than a messenger; it's a revolutionary personal assistant designed to manage your digital life and change the way you interact with AI.
+            Brainsay is not just a messaging platform—it’s a smart personal assistant that revolutionizes how you manage your digital life and engage with AI.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
