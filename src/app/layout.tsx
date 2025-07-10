@@ -5,7 +5,7 @@ import { GlobalParticleBackground } from '@/components/global-particle-backgroun
 
 export const metadata: Metadata = {
   title: 'Brainsay',
-  description: 'Smarter Conversations. Live Connections.',
+  description: 'AI-Powered Messaging. Smarter Chats, Seamless Connections.',
   icons: {
     icon: '/icon.png',
   },

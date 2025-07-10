@@ -40,39 +40,21 @@ export function GlobalParticleBackground() {
     
     // Particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCnt = 7000;
+    const particlesCnt = 5000;
     const posArray = new Float32Array(particlesCnt * 3);
     const colors = new Float32Array(particlesCnt * 3);
-    const velocities = new Float32Array(particlesCnt * 3);
-    const initialPositions = new Float32Array(particlesCnt * 3);
     
     const colorPrimary = new THREE.Color('hsl(var(--primary))');
     const colorAccent = new THREE.Color('hsl(var(--accent))');
-    const colorSecondary = new THREE.Color('hsl(var(--secondary))');
 
     for (let i = 0; i < particlesCnt * 3; i++) {
         const i3 = i * 3;
-        posArray[i3 + 0] = (Math.random() - 0.5) * 20;
-        posArray[i3 + 1] = (Math.random() - 0.5) * 20;
-        posArray[i3 + 2] = (Math.random() - 0.5) * 20;
-
-        velocities[i3 + 0] = (Math.random() - 0.5) * 0.003;
-        velocities[i3 + 1] = (Math.random() - 0.5) * 0.003;
-        velocities[i3 + 2] = (Math.random() - 0.5) * 0.003;
-
-        initialPositions[i3 + 0] = posArray[i3 + 0];
-        initialPositions[i3 + 1] = posArray[i3 + 1];
-        initialPositions[i3 + 2] = posArray[i3 + 2];
+        posArray[i3 + 0] = (Math.random() - 0.5) * 15;
+        posArray[i3 + 1] = (Math.random() - 0.5) * 15;
+        posArray[i3 + 2] = (Math.random() - 0.5) * 15;
 
         const randomColor = Math.random();
-        let color = new THREE.Color();
-        if(randomColor < 0.33) {
-            color = colorPrimary;
-        } else if (randomColor < 0.66) {
-            color = colorAccent;
-        } else {
-            color = colorSecondary;
-        }
+        let color = randomColor < 0.5 ? colorPrimary : colorAccent;
 
         colors[i3 + 0] = color.r;
         colors[i3 + 1] = color.g;
@@ -82,7 +64,7 @@ export function GlobalParticleBackground() {
     particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({ 
-        size: 0.02, 
+        size: 0.025, 
         vertexColors: true,
         transparent: true,
         blending: THREE.AdditiveBlending,
@@ -91,58 +73,77 @@ export function GlobalParticleBackground() {
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    const raycaster = new THREE.Raycaster();
+    // Lines
+    const lineGeometry = new THREE.BufferGeometry();
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 'hsl(var(--border))',
+      transparent: true,
+      opacity: 0.1,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lineMesh);
 
     // Animation loop
     let frameId: number;
     const clock = new THREE.Clock();
+    const raycaster = new THREE.Raycaster();
+    
     const animate = () => {
         const elapsedTime = clock.getElapsedTime();
-        
         raycaster.setFromCamera(mouse.current, camera);
-        
         const positions = particlesGeometry.attributes.position.array as Float32Array;
 
-        for (let i = 0; i < particlesCnt; i++) {
-            const i3 = i * 3;
-            const particlePosition = new THREE.Vector3(positions[i3], positions[i3 + 1], positions[i3 + 2]);
-            const initialPos = new THREE.Vector3(initialPositions[i3], initialPositions[i3 + 1], initialPositions[i3 + 2]);
-            
-            const worldParticlePosition = particlesMesh.localToWorld(particlePosition.clone());
-            const distanceToMouse = worldParticlePosition.distanceTo(raycaster.ray.origin);
-            
-            let targetX = initialPos.x;
-            let targetY = initialPos.y;
-
-            if (distanceToMouse < 2) { 
-                const repelStrength = Math.pow(2 - distanceToMouse, 2) * 0.05;
-                const direction = new THREE.Vector3().subVectors(worldParticlePosition, raycaster.ray.origin).normalize();
-                targetX += direction.x * repelStrength;
-                targetY += direction.y * repelStrength;
-            }
-
-            positions[i3] += (targetX - positions[i3]) * 0.02 + velocities[i3];
-            positions[i3 + 1] += (targetY - positions[i3+1]) * 0.02 + velocities[i3+1];
-            
-            positions[i3+2] += Math.sin(elapsedTime + i) * 0.0005;
-
-            if (positions[i3+1] < -10) { 
-                positions[i3+1] = 10;
-                initialPositions[i3+1] = 10;
-            }
-            if (positions[i3] < -10) {
-                positions[i3] = 10;
-                initialPositions[i3] = 10;
-            } else if (positions[i3] > 10) {
-                positions[i3] = -10;
-                initialPositions[i3] = -10;
-            }
+        let mouseRepelStrength = 0;
+        if(mouse.current.x < 9999) {
+          mouseRepelStrength = 1.5;
         }
 
+        // Particle animation
+        for (let i = 0; i < particlesCnt; i++) {
+            const i3 = i * 3;
+            let x = particlesGeometry.attributes.position.getX(i);
+            let y = particlesGeometry.attributes.position.getY(i);
+            let z = particlesGeometry.attributes.position.getZ(i);
+
+            // Simple organic movement
+            positions[i3] += Math.sin(elapsedTime * 0.1 + i) * 0.001;
+            positions[i3+1] += Math.cos(elapsedTime * 0.1 + i) * 0.001;
+            positions[i3+2] += Math.sin(elapsedTime * 0.1 + z) * 0.001;
+
+            // Repel from mouse
+            const particlePos = new THREE.Vector3(x, y, z);
+            const distanceToMouse = particlePos.distanceTo(raycaster.ray.origin);
+            if(distanceToMouse < mouseRepelStrength) {
+                const repelVec = new THREE.Vector3().subVectors(particlePos, raycaster.ray.origin).normalize();
+                positions[i3] += repelVec.x * (mouseRepelStrength - distanceToMouse) * 0.02;
+                positions[i3+1] += repelVec.y * (mouseRepelStrength - distanceToMouse) * 0.02;
+            }
+        }
         particlesGeometry.attributes.position.needsUpdate = true;
         
-        particlesMesh.rotation.y = elapsedTime * 0.01;
-        particlesMesh.rotation.x = elapsedTime * 0.005;
+        // Line connection animation
+        const linePositions = [];
+        const connectionDistance = 1;
+        for (let i = 0; i < particlesCnt; i++) {
+          for (let j = i + 1; j < particlesCnt; j++) {
+            const p1 = new THREE.Vector3(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
+            const p2 = new THREE.Vector3(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
+            const dist = p1.distanceTo(p2);
+
+            if (dist < connectionDistance) {
+              linePositions.push(p1.x, p1.y, p1.z);
+              linePositions.push(p2.x, p2.y, p2.z);
+            }
+          }
+        }
+        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+        lineGeometry.attributes.position.needsUpdate = true;
+
+
+        particlesMesh.rotation.y = elapsedTime * 0.02;
+        particlesMesh.rotation.x = elapsedTime * 0.01;
 
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(animate);
@@ -161,6 +162,10 @@ export function GlobalParticleBackground() {
             mount.removeChild(renderer.domElement);
         }
         renderer.dispose();
+        particlesGeometry.dispose();
+        particlesMaterial.dispose();
+        lineGeometry.dispose();
+        lineMaterial.dispose();
     };
   }, [onResize, onMouseMove]);
 
