@@ -4,7 +4,7 @@ import * as React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
-import { BrainCircuit, Briefcase, Users, MapPin, Bot } from "lucide-react";
+import { BrainCircuit, Briefcase, Users, MapPin, Bot, Phone, Video, MessageCircle } from "lucide-react";
 
 const featuresList = [
   {
@@ -38,6 +38,17 @@ const featuresList = [
       { id: "getCurrentLocation", name: "getCurrentLocation", description: "Your AI can pinpoint your current location to provide relevant, context-aware assistance." },
       { id: "adviseOnLocation", name: "adviseOnLocation", description: "Receive smart suggestions based on where you are, from restaurant recommendations to traffic alerts." },
       { id: "fetchGDELTNews", name: "fetchGDELTNews", description: "Stay informed with the latest news relevant to your location or topics of interest, powered by the GDELT Project." }
+    ]
+  },
+  {
+    icon: <MessageCircle className="w-8 h-8 text-primary" />,
+    title: "Seamless Communication",
+    description: "Connect with anyone, anywhere. Enjoy crystal-clear calls and intelligent messaging that understands you.",
+    roles: [
+        { id: "aiReply", name: "aiReply", description: "Let the AI analyze incoming messages and suggest context-aware replies, which you can send with a single tap." },
+        { id: "aiSendMessage", name: "aiSendMessage", description: "Simply tell your AI who to message and what you want to say, and it will compose and send the message for you." },
+        { id: "audioCall", name: "audioCall", description: "Start a high-quality audio call with any of your contacts directly from the app." },
+        { id: "videoCall", name: "videoCall", description: "Upgrade your conversation to a face-to-face video call with a simple command." }
     ]
   },
   {
