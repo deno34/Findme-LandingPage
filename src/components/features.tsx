@@ -78,7 +78,8 @@ export function Features() {
       <section id="features">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold font-headline">Powered by Nerida Brain</h2>
-          <p className="text-foreground mt-2 max-w-3xl mx-auto">
+          <p className="text-primary mt-2">A product of Nerida AI.</p>
+          <p className="text-foreground mt-4 max-w-3xl mx-auto">
             Brainsay is not just a messaging platform—it’s a smart personal assistant that revolutionizes how you manage your digital life and engage with AI.
           </p>
         </div>
