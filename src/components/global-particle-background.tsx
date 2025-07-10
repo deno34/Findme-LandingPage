@@ -31,47 +31,33 @@ export function GlobalParticleBackground() {
     rendererRef.current = renderer;
     renderer.userData = { camera };
     
-    // Galaxy Parameters
+    // Particle Parameters
     const parameters = {
         count: 10000,
         size: 0.02,
         radius: 5,
-        branches: 3,
-        spin: 1,
-        randomness: 0.5,
-        randomnessPower: 3,
     };
 
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(parameters.count * 3);
     const colors = new Float32Array(parameters.count * 3);
 
-    const colorInside = new THREE.Color('hsl(var(--primary))');
-    const colorOutside = new THREE.Color('hsl(var(--accent))');
+    const colorPrimary = new THREE.Color('hsl(var(--primary))');
+    const colorAccent = new THREE.Color('hsl(var(--accent))');
 
     for (let i = 0; i < parameters.count; i++) {
         const i3 = i * 3;
 
         // Position
-        const radius = Math.random() * parameters.radius;
-        const spinAngle = radius * parameters.spin;
-        const branchAngle = (i % parameters.branches) / parameters.branches * Math.PI * 2;
-        
-        const randomX = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
-        const randomY = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
-        const randomZ = Math.pow(Math.random(), parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * parameters.randomness * radius;
-
-        positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
-        positions[i3 + 1] = randomY;
-        positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
+        positions[i3] = (Math.random() - 0.5) * parameters.radius * 2;
+        positions[i3 + 1] = (Math.random() - 0.5) * parameters.radius * 2;
+        positions[i3 + 2] = (Math.random() - 0.5) * parameters.radius * 2;
 
         // Color
-        const mixedColor = colorInside.clone();
-        mixedColor.lerp(colorOutside, radius / parameters.radius);
-
-        colors[i3] = mixedColor.r;
-        colors[i3 + 1] = mixedColor.g;
-        colors[i3 + 2] = mixedColor.b;
+        const randomColor = Math.random() > 0.5 ? colorPrimary : colorAccent;
+        colors[i3] = randomColor.r;
+        colors[i3 + 1] = randomColor.g;
+        colors[i3 + 2] = randomColor.b;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -96,7 +82,8 @@ export function GlobalParticleBackground() {
     const animate = () => {
         const elapsedTime = clock.getElapsedTime();
 
-        particles.rotation.y = elapsedTime * 0.1;
+        particles.rotation.y = elapsedTime * 0.05;
+        particles.rotation.x = elapsedTime * 0.02;
         
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(animate);
